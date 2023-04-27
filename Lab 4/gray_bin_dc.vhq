@@ -1,0 +1,260 @@
+-- Jed2svhdl, ispLEVER version 2.01 
+-- Header :
+--    File Name :
+--       gray_bin_dc 
+--    Circuit Name :
+--       gray_bin_conditional_dc 
+--    Last Update :
+--       Wed Feb 22 16:30:22 2023
+--    Device Information :
+--       PLD Type P22V10GC
+--    Manufacturer and Part Information :
+--       LAT GAL22V10C-10LJ GAL
+--    Delay Model Selected :MAX
+--    Jedec Information :
+--	ispLEVER Classic 2.1.00.02.49.20 Lattice Semiconductor Corp.
+--	JEDEC file for: P22V10GC V1.1
+--	Created on: Wed Feb 22 16:29:39 2023
+--	
+--	
+-- endHeader
+
+LIBRARY j2svlib;
+USE j2svlib.j2svlib.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.all;
+USE std.textio.all;
+--------------------------------------------------------------------------
+--                                                                      --
+--              MAIN PLD NETLIST MODULE                                 --
+--                                                                      --
+--------------------------------------------------------------------------
+
+ENTITY gray_bin_conditional_dc IS
+   GENERIC (
+-- Delay Parameters:
+--   MAX delay used
+       tpLH09 : time := 0 ns;
+       tpHL09 : time := 0 ns;
+       tpLH11 : time := 0 ns;
+       tpHL11 : time := 0 ns;
+       tpLH_iob : time := 0 ns;
+       tpHL_iob : time := 0 ns;
+       tpLH03 : time := 0 ns;
+       tpHL03 : time := 0 ns;
+       tpLH05 : time := 0 ns;
+       tpHL05 : time := 0 ns;
+       tpLH_inco_lump : time := 10 ns;
+       tpHL_inco_lump : time := 10 ns;
+       tpLH_oe : time := 0 ns;
+       tpHL_oe : time := 0 ns;
+       tpLH_oe_pterm : time := 10 ns;
+       tpHL_oe_pterm : time := 10 ns;
+       t_preset : time := 0 ns;
+       t_reset : time := 8 ns;
+       t_cnt : time := 10 ns;
+       T_ckout : time := 7 ns;
+       t_setup : time := 7 ns;
+       t_hold  : time := 0 ns;
+       t_co   : time := 7 ns;
+       t_cf    : time := 3 ns;
+       tpLH_fo_lump : time:= 4 ns;
+       tpHL_fo_lump : time := 4 ns);
+   PORT (
+
+	PIN02: IN STD_LOGIC := '0';
+	PIN07: IN STD_LOGIC := '0';
+	PIN09: IN STD_LOGIC := '0';
+	PIN10: IN STD_LOGIC := '0';
+	PIN11: IN STD_LOGIC := '0';
+	PIN12: IN STD_LOGIC := '0';
+	PIN13: IN STD_LOGIC := '0';
+	PIN16: IN STD_LOGIC := '0';
+	PIN17: INOUT STD_LOGIC;
+	PIN18: INOUT STD_LOGIC;
+	PIN19: INOUT STD_LOGIC;
+	PIN20: INOUT STD_LOGIC;
+	PIN21: INOUT STD_LOGIC;
+	PIN23: INOUT STD_LOGIC;
+	g: IN STD_LOGIC_VECTOR(3 downto 0);
+	b: OUT STD_LOGIC_VECTOR(3 downto 0));
+
+--Pin Assignments:
+    -- alias PIN03 is: STD_LOGIC g(3);
+    -- alias PIN04 is: STD_LOGIC g(2);
+    -- alias PIN05 is: STD_LOGIC g(1);
+    -- alias PIN06 is: STD_LOGIC g(0);
+    -- alias PIN24 is: STD_LOGIC b(0);
+    -- alias PIN25 is: STD_LOGIC b(1);
+    -- alias PIN26 is: STD_LOGIC b(2);
+    -- alias PIN27 is: STD_LOGIC b(3);
+
+END gray_bin_conditional_dc;
+
+ARCHITECTURE structure OF gray_bin_conditional_dc IS
+
+-- Signal Declaration :
+   SIGNAL  b_3_ODUMMY, b_2_ODUMMY, b_1_ODUMMY, b_0_ODUMMY,
+           NODE30_ob, NODE30_o, NODE29_ob, NODE29_o, FO_OUTREG23_o,
+           FO_OUTREG21_o, FO_OUTREG20_o, FO_OUTREG19_o, FO_OUTREG18_o,
+           FO_OUTREG17_o, NODE36_ob, NODE36_o, NODE35_ob, NODE35_o,
+           NODE34_ob, NODE34_o, NODE33_ob, NODE33_o, NODE32_ob, NODE32_o,
+           NODE31_ob, NODE31_o, OUTREG23_ob, OUTREG23_o, OUTREG21_ob,
+           OUTREG21_o, OUTREG20_ob, OUTREG20_o, OUTREG19_ob, OUTREG19_o,
+           OUTREG18_ob, OUTREG18_o, OUTREG17_ob, OUTREG17_o, O2O_CKDR_o,
+           ST027_o, ST026_o, ST025_o, ST024_o, PT040_1760_o,
+           PT039_1716_o, PT038_1672_o, PT037_1628_o, PT036_1584_o,
+           PT035_1540_o, PT024_1056_o, PT023_1012_o, PT022_968_o,
+           PT011_484_o, PT002_88_o, INBUF27_ob, INBUF27_o, INBUF26_ob,
+           INBUF26_o, INBUF25_ob, INBUF25_o, INBUF24_ob, INBUF24_o,
+           INBUF16_ob, INBUF16_o, INBUF13_ob, INBUF13_o, INBUF12_ob,
+           INBUF12_o, INBUF11_ob, INBUF11_o, INBUF10_ob, INBUF10_o,
+           INBUF09_ob, INBUF09_o, INBUF07_ob, INBUF07_o, INBUF06_ob,
+           INBUF06_o, INBUF05_ob, INBUF05_o, INBUF04_ob, INBUF04_o,
+           INBUF03_ob, INBUF03_o, CLKIN1_ob, CLKIN1_o
+           : STD_LOGIC ;
+   SIGNAL  PWR : STD_LOGIC := '1' ;
+   SIGNAL  GND : STD_LOGIC := '0' ;
+   SIGNAL  PWRUPSTATE : STD_LOGIC := '0' ;
+
+--   PLD Netlist ---------
+  BEGIN
+
+--   Input Buffer:
+      CLKIN1_o <= PIN02 after g_delay ( CLKIN1_o,tpLH_iob,tpHL_iob);
+      CLKIN1_ob <=  not(PIN02) after g_delay ( CLKIN1_ob,tpLH_iob,tpHL_iob);
+      INBUF03_o <= g(3) after g_delay ( INBUF03_o,tpLH_iob,tpHL_iob);
+      INBUF03_ob <=  not(g(3)) after g_delay ( INBUF03_ob,tpLH_iob,tpHL_iob);
+      INBUF04_o <= g(2) after g_delay ( INBUF04_o,tpLH_iob,tpHL_iob);
+      INBUF04_ob <=  not(g(2)) after g_delay ( INBUF04_ob,tpLH_iob,tpHL_iob);
+      INBUF05_o <= g(1) after g_delay ( INBUF05_o,tpLH_iob,tpHL_iob);
+      INBUF05_ob <=  not(g(1)) after g_delay ( INBUF05_ob,tpLH_iob,tpHL_iob);
+      INBUF06_o <= g(0) after g_delay ( INBUF06_o,tpLH_iob,tpHL_iob);
+      INBUF06_ob <=  not(g(0)) after g_delay ( INBUF06_ob,tpLH_iob,tpHL_iob);
+      INBUF07_o <= PIN07 after g_delay ( INBUF07_o,tpLH_iob,tpHL_iob);
+      INBUF07_ob <=  not(PIN07) after g_delay ( INBUF07_ob,tpLH_iob,tpHL_iob);
+      INBUF09_o <= PIN09 after g_delay ( INBUF09_o,tpLH_iob,tpHL_iob);
+      INBUF09_ob <=  not(PIN09) after g_delay ( INBUF09_ob,tpLH_iob,tpHL_iob);
+      INBUF10_o <= PIN10 after g_delay ( INBUF10_o,tpLH_iob,tpHL_iob);
+      INBUF10_ob <=  not(PIN10) after g_delay ( INBUF10_ob,tpLH_iob,tpHL_iob);
+      INBUF11_o <= PIN11 after g_delay ( INBUF11_o,tpLH_iob,tpHL_iob);
+      INBUF11_ob <=  not(PIN11) after g_delay ( INBUF11_ob,tpLH_iob,tpHL_iob);
+      INBUF12_o <= PIN12 after g_delay ( INBUF12_o,tpLH_iob,tpHL_iob);
+      INBUF12_ob <=  not(PIN12) after g_delay ( INBUF12_ob,tpLH_iob,tpHL_iob);
+      INBUF13_o <= PIN13 after g_delay ( INBUF13_o,tpLH_iob,tpHL_iob);
+      INBUF13_ob <=  not(PIN13) after g_delay ( INBUF13_ob,tpLH_iob,tpHL_iob);
+      INBUF16_o <= PIN16 after g_delay ( INBUF16_o,tpLH_iob,tpHL_iob);
+      INBUF16_ob <=  not(PIN16) after g_delay ( INBUF16_ob,tpLH_iob,tpHL_iob);
+      INBUF24_o <= b_0_ODUMMY after g_delay ( INBUF24_o,tpLH_iob,tpHL_iob);
+      INBUF24_ob <=  not(b_0_ODUMMY) after g_delay ( INBUF24_ob,tpLH_iob,tpHL_iob);
+      INBUF25_o <= b_1_ODUMMY after g_delay ( INBUF25_o,tpLH_iob,tpHL_iob);
+      INBUF25_ob <=  not(b_1_ODUMMY) after g_delay ( INBUF25_ob,tpLH_iob,tpHL_iob);
+      INBUF26_o <= b_2_ODUMMY after g_delay ( INBUF26_o,tpLH_iob,tpHL_iob);
+      INBUF26_ob <=  not(b_2_ODUMMY) after g_delay ( INBUF26_ob,tpLH_iob,tpHL_iob);
+      INBUF27_o <= b_3_ODUMMY after g_delay ( INBUF27_o,tpLH_iob,tpHL_iob);
+      INBUF27_ob <=  not(b_3_ODUMMY) after g_delay ( INBUF27_ob,tpLH_iob,tpHL_iob);
+
+--   Product Terms (AND array):
+      PT002_88_o <= INBUF03_o after g_delay ( PT002_88_o,tpLH03,tpHL03);
+      PT011_484_o <= INBUF03_ob AND INBUF04_o after g_delay ( PT011_484_o,tpLH03,tpHL03);
+      PT022_968_o <= INBUF03_o AND INBUF04_o AND INBUF05_o after g_delay ( PT022_968_o,tpLH03,tpHL03);
+      PT023_1012_o <= INBUF03_ob AND INBUF04_ob AND INBUF05_o after g_delay ( PT023_1012_o,tpLH03,tpHL03);
+      PT024_1056_o <= INBUF03_ob AND INBUF04_o AND INBUF05_ob after g_delay ( PT024_1056_o,tpLH03,tpHL03);
+      PT035_1540_o <= INBUF03_ob AND INBUF04_o AND INBUF05_o AND INBUF06_o after g_delay ( PT035_1540_o,tpLH03,tpHL03);
+      PT036_1584_o <= INBUF03_o AND INBUF04_o AND INBUF05_ob AND INBUF06_o after g_delay ( PT036_1584_o,tpLH03,tpHL03);
+      PT037_1628_o <= INBUF03_ob AND INBUF04_ob AND INBUF05_ob AND INBUF06_o after g_delay ( PT037_1628_o,tpLH03,tpHL03);
+      PT038_1672_o <= INBUF03_o AND INBUF04_o AND INBUF05_o AND INBUF06_ob after g_delay ( PT038_1672_o,tpLH03,tpHL03);
+      PT039_1716_o <= INBUF03_ob AND INBUF04_ob AND INBUF05_o AND INBUF06_ob after g_delay ( PT039_1716_o,tpLH03,tpHL03);
+      PT040_1760_o <= INBUF03_ob AND INBUF04_o AND INBUF05_ob AND INBUF06_ob after g_delay ( PT040_1760_o,tpLH03,tpHL03);
+
+--   Sum Terms (OR arrray):
+      ST024_o <= PT035_1540_o OR PT036_1584_o OR PT037_1628_o OR PT038_1672_o OR PT039_1716_o OR PT040_1760_o after g_delay ( ST024_o,tpLH_inco_lump,tpHL_inco_lump);
+      ST025_o <= PT022_968_o OR PT023_1012_o OR PT024_1056_o after g_delay ( ST025_o,tpLH_inco_lump,tpHL_inco_lump);
+      ST026_o <= PT011_484_o after g_delay ( ST026_o,tpLH_inco_lump,tpHL_inco_lump);
+      ST027_o <= PT002_88_o after g_delay ( ST027_o,tpLH_inco_lump,tpHL_inco_lump);
+
+--   Macro Cells:
+      O2O_CKDR_o <= CLKIN1_o after g_delay ( O2O_CKDR_o,tpLH05,tpHL05);
+      g_dff_spar( OUTREG17_o, OUTREG17_ob, GND, O2O_CKDR_o, NODE30_o, NODE29_o, PWRUPSTATE, t_cf, t_reset);
+      process (GND, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (GND, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG17");
+      end process;
+      process (NODE30_o, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (NODE30_o, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG17");
+      end process;
+      g_dff_spar( OUTREG18_o, OUTREG18_ob, GND, O2O_CKDR_o, NODE30_o, NODE29_o, PWRUPSTATE, t_cf, t_reset);
+      process (GND, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (GND, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG18");
+      end process;
+      process (NODE30_o, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (NODE30_o, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG18");
+      end process;
+      g_dff_spar( OUTREG19_o, OUTREG19_ob, GND, O2O_CKDR_o, NODE30_o, NODE29_o, PWRUPSTATE, t_cf, t_reset);
+      process (GND, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (GND, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG19");
+      end process;
+      process (NODE30_o, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (NODE30_o, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG19");
+      end process;
+      g_dff_spar( OUTREG20_o, OUTREG20_ob, GND, O2O_CKDR_o, NODE30_o, NODE29_o, PWRUPSTATE, t_cf, t_reset);
+      process (GND, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (GND, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG20");
+      end process;
+      process (NODE30_o, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (NODE30_o, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG20");
+      end process;
+      g_dff_spar( OUTREG21_o, OUTREG21_ob, GND, O2O_CKDR_o, NODE30_o, NODE29_o, PWRUPSTATE, t_cf, t_reset);
+      process (GND, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (GND, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG21");
+      end process;
+      process (NODE30_o, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (NODE30_o, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG21");
+      end process;
+      g_dff_spar( OUTREG23_o, OUTREG23_ob, GND, O2O_CKDR_o, NODE30_o, NODE29_o, PWRUPSTATE, t_cf, t_reset);
+      process (GND, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (GND, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG23");
+      end process;
+      process (NODE30_o, O2O_CKDR_o) variable lastd, lastc: time; begin
+           p_chksuho (NODE30_o, O2O_CKDR_o, t_setup, t_hold, lastc, lastd, "OUTREG23");
+      end process;
+
+--   Feedback Node:
+      NODE31_o <= OUTREG17_ob after g_delay ( NODE31_o,tpLH_iob,tpHL_iob);
+      NODE31_ob <=  not(OUTREG17_ob) after g_delay ( NODE31_ob,tpLH_iob,tpHL_iob);
+      NODE32_o <= OUTREG18_ob after g_delay ( NODE32_o,tpLH_iob,tpHL_iob);
+      NODE32_ob <=  not(OUTREG18_ob) after g_delay ( NODE32_ob,tpLH_iob,tpHL_iob);
+      NODE33_o <= OUTREG19_ob after g_delay ( NODE33_o,tpLH_iob,tpHL_iob);
+      NODE33_ob <=  not(OUTREG19_ob) after g_delay ( NODE33_ob,tpLH_iob,tpHL_iob);
+      NODE34_o <= OUTREG20_ob after g_delay ( NODE34_o,tpLH_iob,tpHL_iob);
+      NODE34_ob <=  not(OUTREG20_ob) after g_delay ( NODE34_ob,tpLH_iob,tpHL_iob);
+      NODE35_o <= OUTREG21_ob after g_delay ( NODE35_o,tpLH_iob,tpHL_iob);
+      NODE35_ob <=  not(OUTREG21_ob) after g_delay ( NODE35_ob,tpLH_iob,tpHL_iob);
+      NODE36_o <= OUTREG23_ob after g_delay ( NODE36_o,tpLH_iob,tpHL_iob);
+      NODE36_ob <=  not(OUTREG23_ob) after g_delay ( NODE36_ob,tpLH_iob,tpHL_iob);
+
+--   Output Buffer:
+      FO_OUTREG17_o <= OUTREG17_o after g_delay ( FO_OUTREG17_o,tpLH_fo_lump,tpHL_fo_lump);
+      g_notif1( PIN17, FO_OUTREG17_o, GND, tpLH09,tpHL09);
+      FO_OUTREG18_o <= OUTREG18_o after g_delay ( FO_OUTREG18_o,tpLH_fo_lump,tpHL_fo_lump);
+      g_notif1( PIN18, FO_OUTREG18_o, GND, tpLH09,tpHL09);
+      FO_OUTREG19_o <= OUTREG19_o after g_delay ( FO_OUTREG19_o,tpLH_fo_lump,tpHL_fo_lump);
+      g_notif1( PIN19, FO_OUTREG19_o, GND, tpLH09,tpHL09);
+      FO_OUTREG20_o <= OUTREG20_o after g_delay ( FO_OUTREG20_o,tpLH_fo_lump,tpHL_fo_lump);
+      g_notif1( PIN20, FO_OUTREG20_o, GND, tpLH09,tpHL09);
+      FO_OUTREG21_o <= OUTREG21_o after g_delay ( FO_OUTREG21_o,tpLH_fo_lump,tpHL_fo_lump);
+      g_notif1( PIN21, FO_OUTREG21_o, GND, tpLH09,tpHL09);
+      FO_OUTREG23_o <= OUTREG23_o after g_delay ( FO_OUTREG23_o,tpLH_fo_lump,tpHL_fo_lump);
+      g_notif1( PIN23, FO_OUTREG23_o, GND, tpLH09,tpHL09);
+      g_bufif1( b_0_ODUMMY, ST024_o, PWR, tpLH11,tpHL11);
+      g_bufif1( b_1_ODUMMY, ST025_o, PWR, tpLH11,tpHL11);
+      g_bufif1( b_2_ODUMMY, ST026_o, PWR, tpLH11,tpHL11);
+      g_bufif1( b_3_ODUMMY, ST027_o, PWR, tpLH11,tpHL11);
+      NODE29_o <= GND after g_delay ( NODE29_o,tpLH_iob,tpHL_iob);
+      NODE29_ob <=  not(GND) after g_delay ( NODE29_ob,tpLH_iob,tpHL_iob);
+      NODE30_o <= GND after g_delay ( NODE30_o,t_preset,t_preset);
+      NODE30_ob <=  not(GND) after g_delay ( NODE30_ob,t_preset,t_preset);
+      b(0) <= b_0_ODUMMY;
+      b(1) <= b_1_ODUMMY;
+      b(2) <= b_2_ODUMMY;
+      b(3) <= b_3_ODUMMY;
+END structure;
